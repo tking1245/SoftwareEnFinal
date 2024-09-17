@@ -6,10 +6,19 @@ import requests
 import matplotlib.pyplot as plt
 import yfinance 
 
-apple_stock = yfinance.Ticker("AAPL")
-apple_data = apple_stock.history("6mo")
+# Writing to CSV file
+#with open('downData.csv', mode='w', newline='') as file:
+#    writer = csv.writer(file)
+#    writer.writerows(data)
+#print("CSV file populated successfully!")
 
+time_input = str(input()) # code to make the csv files named accordingly with respect to the timeframe being downloaded.
 
+apple = yfinance.Ticker("AAPL")
+data = apple.history(period = time_input)
+df_data = pd.DataFrame(data) # convert the data to a dataFrame 
 
-aFrame = pd.DataFrame.to_markdown(apple_data)
-print(aFrame)
+df_data.to_csv(time_input+".csv" , index = True) # 
+
+print(data.head())
+
