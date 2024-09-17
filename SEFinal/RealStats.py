@@ -22,3 +22,17 @@ df_data.to_csv(time_input+".csv" , index = True) #
 
 print(data.head())
 
+
+
+# temp code
+def create_graph(t):
+
+    t = str(input())
+
+    apple = yfinance.Ticker("AAPL")
+    data = apple.history(period = t)
+    df_data = pd.DataFrame(data) # convert the data to a dataFrame 
+
+    return (df_data.to_csv(t+".csv" , index = True))
+
+
