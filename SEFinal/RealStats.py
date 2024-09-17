@@ -25,14 +25,12 @@ print(data.head())
 
 
 # temp code
-def create_graph(t):
-
-    t = str(input())
+def create_graph(t): # going to add s as a functional argument in order to control the stock being studied as well
 
     apple = yfinance.Ticker("AAPL")
-    data = apple.history(period = t)
+    data = apple.history(period = str(t))
     df_data = pd.DataFrame(data) # convert the data to a dataFrame 
 
-    return (df_data.to_csv(t+".csv" , index = True))
+    return (df_data.to_csv(str(t)+".csv" , index = True))
 
 
