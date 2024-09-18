@@ -27,8 +27,32 @@ import yfinance
 # temp code
 def create_graph(t): # going to add s as a functional argument in order to control the stock being studied as well
 
+    # 6 stocks which will be used in graphing process
+    # yfinance data: Apple
     apple = yfinance.Ticker("AAPL")
     data = apple.history(period = str(t))
+
+    # yfinance data: Meta
+    meta = yfinance.Ticker("META")
+    data = meta.history(period = srt(t))
+    
+    # yfinance data: Alphabet
+    aplphabet = yfinance.Ticker("GOOG")
+    data = alphabet.hisotry(period = srt(t))
+    
+    # yfinance data: Microsoft
+    microsoft = yfinance.Ticker("MSFT")
+    data = microsoft.history(period = srt(t))
+    
+    # yfinance data: Nvidia
+    nvidia = yfinance.Ticker("NVDA")
+    data = nvidia.history(period = srt(t))
+    
+    # yfinance data: Berkshire Hathaway
+    bhath = yfinance.Ticker("BRK.B")
+    data = bhath.history(period = srt(t))
+    
+    
     df_data = pd.DataFrame(data) # convert the data to a dataFrame 
 
     return (df_data.to_csv(str(t)+".csv" , index = True))
