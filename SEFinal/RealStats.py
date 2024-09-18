@@ -12,15 +12,15 @@ import yfinance
 #    writer.writerows(data)
 #print("CSV file populated successfully!")
 
-time_input = str(input()) # code to make the csv files named accordingly with respect to the timeframe being downloaded.
+# | time_input = str(input()) # code to make the csv files named accordingly with respect to the timeframe being downloaded.
 
-apple = yfinance.Ticker("AAPL")
-data = apple.history(period = time_input)
-df_data = pd.DataFrame(data) # convert the data to a dataFrame 
+# | apple = yfinance.Ticker("AAPL")
+# | data = apple.history(period = time_input)
+# | df_data = pd.DataFrame(data) # convert the data to a dataFrame 
 
-df_data.to_csv(time_input+".csv" , index = True) # 
+# | df_data.to_csv(time_input+".csv" , index = True) # 
 
-print(data.head())
+# | print(data.head())
 
 
 
