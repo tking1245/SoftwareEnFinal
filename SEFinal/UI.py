@@ -1,5 +1,6 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+import RealStats as rs
 
 def show_sidebar(event):
     """Show the sidebar and hide the menu icon when hovering over the menu icon."""
@@ -10,6 +11,21 @@ def hide_sidebar(event):
     """Hide the sidebar and show the menu icon when moving away from the sidebar."""
     sidebar.place_forget()    # Hide the sidebar
     menu_icon.place(x=10, y=10)  # Show the menu icon again
+
+########### HISTORY DATA WINDOW
+
+def run_historic_data_window():
+
+    hisWin = tk.Tk()
+    hisWin.mainloop()
+    return 
+
+
+
+
+
+
+
 
 # Create the main window
 window = tk.Tk()
@@ -43,7 +59,7 @@ sidebar = tk.Frame(window, width=200, height=600 , bd=2, relief = 'solid')  # Ra
 # Sidebar buttons or options
 sidebar_button1 = tk.Button(sidebar, text="Trading Practice", relief="sunken", fg="Black", font=("Times", 12))
 sidebar_button1.pack(pady=10, padx=10, fill='x')
-sidebar_button2 = tk.Button(sidebar, text="Option 2", relief="flat", fg="Black", font=("Arial", 12))
+sidebar_button2 = tk.Button(sidebar, text="Option 2", relief="flat",command = run_historic_data_window, fg="Black", font=("Arial", 12))
 sidebar_button2.pack(pady=10, padx=10, fill='x')
 sidebar_button3 = tk.Button(sidebar, text="Option 3", relief="flat", fg="Black", font=("Arial", 12))
 sidebar_button3.pack(pady=10, padx=10, fill='x')
@@ -63,3 +79,4 @@ window.config(background='DarkSlateGrey')
 
 
 window.mainloop()
+
