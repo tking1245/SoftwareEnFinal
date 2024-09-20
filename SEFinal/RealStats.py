@@ -19,6 +19,6 @@ def create_graph(t,s): # going to add s as a functional argument in order to con
     data = stock_name.history(period = str(t))
     df_data = pd.DataFrame(data) # convert the data to a dataFrame 
 
-    return (df_data.to_csv(str(t)+".csv" , index = True))
+    return (df_data.to_csv(str(t)+str(s)".csv" , index = True))
 
 create_graph(input(), input())
