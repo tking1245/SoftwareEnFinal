@@ -1,6 +1,6 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-import RealStats as rs
+
 
 def show_sidebar(event):
     """Show the sidebar and hide the menu icon when hovering over the menu icon."""
@@ -19,11 +19,6 @@ def run_historic_data_window():
     hisWin = tk.Tk()
     hisWin.mainloop()
     return 
-
-
-
-
-
 
 
 
@@ -79,4 +74,3 @@ window.config(background='DarkSlateGrey')
 
 
 window.mainloop()
-
