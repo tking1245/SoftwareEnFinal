@@ -2,8 +2,19 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import yfinance as yf
 import pandas as pd
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
+from SpecificStocksPull import create_graph_for_pulled_data
 
-def create_graph(stock, time):
+def open_Dumwin():
+    win = tk.Tk()
+    
+
+    win.mainloop()
+    
+
+
+def create_csv(stock, time):
     """Fetch historical data for a stock and save it to a CSV file."""
     try:
         stock_name = yf.Ticker(stock)
@@ -16,10 +27,11 @@ def create_graph(stock, time):
         df_data = pd.DataFrame(data)
         csv_filename = f"{stock}_{time}.csv"
         
+        
         # Save to CSV
         df_data.to_csv(csv_filename, index=True)
         
-        return f"Data saved to {csv_filename}"
+        return (f"Data saved to {csv_filename}" , create_graph_for_pulled_data(stock, time))
     
     except Exception as e:
         return f"Error: {e}"
@@ -58,7 +70,7 @@ def run_historic_data_window():
     def grab_data():
         stock = stockinput.get().strip()
         time = timeFrame.get().strip()
-        result = create_graph(stock, time)
+        result = create_csv(stock, time)
         result_label.config(text=result)
 
     # Button to trigger the graph creation
@@ -99,11 +111,11 @@ sidebar_button1 = tk.Button(sidebar, text="Trading Practice", relief="sunken", f
 sidebar_button1.pack(pady=10, padx=10, fill='x')
 sidebar_button2 = tk.Button(sidebar, text="TEMP LOAD DATA", relief="flat", command=run_historic_data_window, fg="Black", font=("Arial", 12))
 sidebar_button2.pack(pady=10, padx=10, fill='x')
-sidebar_button3 = tk.Button(sidebar, text="Option 3", relief="flat", fg="Black", font=("Arial", 12))
+sidebar_button3 = tk.Button(sidebar, text="Option 3", relief="flat", fg="Black", font=("Arial", 12), command = open_Dumwin)
 sidebar_button3.pack(pady=10, padx=10, fill='x')
 
 # Menu icon button
-menu_icon = tk.Button(window, text="☰", font=("Arial", 16), bg="grey", fg="white", relief="flat")
+menu_icon = tk.Button(window, text="☰", font=("Arial", 16), bg="grey", fg="DarkSlateGrey", relief="flat")
 menu_icon.place(x=10, y=10)
 
 # Bind events for sidebar and menu icon
@@ -117,10 +129,38 @@ window.config(background='DarkSlateGrey')
 window.mainloop()
 
 
+########## THIS IS THE TKINTER LANDING PAGE GRAPH COMPILING CODE
 
-##################################################
+def graph_stuff():
+    root = tk.Tk()
+    root.title("Real-Time Stock Price")
 
 
+    frame = tk.Frame(root)
+    frame.pack()
+
+    fig, ax = plt.subplots()
+
+    canvas = FigureCanvasTkAgg(fig, master=frame)
+    canvas.get_tk_widget().pack()
+
+    def update_graph(stock_symbol):
+        stock_data = yf.download(tickers=stock_symbol, period='1d', interval='1m')
+        ax.clear()
+        
+        stock_data['Close'].plot(ax=ax, color='blue')
+        
+
+        ax.set_title(f'Real-Time Stock Price for {stock_symbol}')
+        ax.set_xlabel('Time')
+        ax.set_ylabel('Price (USD)')
+        canvas.draw()
+
+    def refresh_graph(stock_symbol):
+        update_graph(stock_symbol)
+        root.after(60000, refresh_graph, stock_symbol)
+
+
+    root.mainloop()
 
 ######
-
